@@ -1,0 +1,73 @@
+Key Notes:
+
+Most of the configuration files under Linux are text files, so you can use vim to edit settings.
+Vim can be regarded as a program editor, which can be used to edit shell scripts, configuration files, etc., to avoid typos;
+Vi is an editor for all unix like operating systems, and the execution speed is fast;
+Vi has three modes, the general mode can be changed to the edit and command column mode, but the edit mode and the command column mode are not interchangeable;
+Commonly used buttons are i, [Esc], :wq, etc.
+The screen of vi can be roughly divided into two parts, (1) the first half of the text and (2) the last row of the state + command column mode;
+The numbers are meaningful and are used to indicate the meaning of repeated actions, such as 5yy for copying 5 lines;
+In the movement of the cursor, uppercase G is often used, especially 1G, G moves to the head/tail function of the article!
+
+
+The replacement function of vi is also great! :n1,n2s/old/new/g Pay special attention to learning;
+The decimal point "." is the same as repeating the previous action, and is also a frequently used button function!
+Just enter the edit mode and just remember: i, o, R three buttons! Especially adding a row of o and replacing R
+Vim will actively create a swap temporary archive, so don't break the line at will!
+If there are aligned blocks in the article, you can use [ctrl]-v for copy/paste/delete behavior.
+Use the :sp function to split the window
+The environment settings for vim can be written to the ~/.vimrc file;
+You can use iconv to convert file code encoding
+Use dos2unix and unix2dos to change the end-of-line character of each line of the file.
+
+
+Please create a directory called vitest in the /tmp directory.
+Go to the vitest directory;
+http://linux.vbird.org/linux_basic/0310vi/man.config
+Copy /etc/man.config to the bottom of this directory (or download the man.config file from the above link);
+Use vi to open the man.config file in this directory;
+Set the line number in vi;
+Move to line 58 and move 40 characters to the right. What directory is inside the double quotes you see?
+Move to the first line and search down the string "bzip2". What is the first line?
+Next, I want to change the "lowercase man string" between 50 and 100 lines to "uppercase MAN string", and choose whether to modify it one by one, how to issue instructions? If you keep pressing y in the selection process, will the result change a few man in the last line?
+After the revision, suddenly repented, to be fully restored, what are the methods?
+I want to copy the contents of the nine lines 65 to 73 (with MANPATH_MAP) and paste them after the last line;
+I want to delete the comment data between the 21st and 42st lines starting with the symbol. How do I delete it?
+Save this file as a file name of man.test.config;
+Go to line 27 and delete 15 characters. What is the first word that appears?
+Add a new line in the first line, and enter "I am a student..." for the content of the line;
+Leave it after saving!
+
+
+
+mkdir /tmp/vitest
+cd /tmp/vitest
+cp /etc/man.config .
+vi man.config
+:set nu #Then you will see the number on the left side as the line number.
+Press "58G" first and then press "40→" to see the word "/dir/bin/foo" in double quotes;
+After executing "1G" or "gg" first, directly enter "/bzip2", then go to line 118!
+Directly release
+
+:50,100s/man/MAN/gc!
+
+If you keep pressing 'y', the description of "Replace 25 strings in 23 lines" will appear.
+1. The simple method can always press 'u' to return to the original state,
+2. use !q
+
+"65G" and then "9yy" after the last line will appear "copy nine lines" and other instructions.
+
+Press 'G '' to the last line, then paste the  'p' on the nine lines!
+
+Because 21~42 22 lines,
+"21G" → "22dd" can delete 22 lines.
+
+At this time, you will find that the 21 lines of the cursor become the beginning of MANPATH, and the lines of the symbol are deleted.
+
+':w man.test.config', you will find the words "man.test.config" [New].. on the last line.
+
+After "27G", give him "15x" to delete 15 characters and the words "you" appear;
+
+First go to the first line of "1G",
+then press the uppercase "O" to add a new line and insert mode; after entering "I am a student...",
+press [Esc] to return to the normal mode and wait Follow-up
